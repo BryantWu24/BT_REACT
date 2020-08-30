@@ -27,42 +27,72 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## `Semantic-UI-React`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### how to install semantic-ui-react
+1.Open Terminal and input "npm i semantic-ui-react --save " and " npm i semantic-ui-caa --save "
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2.Open src/index.js and input "import 'semantic-ui-css/semantic.min.css';"
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## `React-Redux`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### how to install react-redux
+1.Open Terminal and input "npm i react-redux --save" and " npm i redux --save"
 
-## Learn More
+2.Create action/index.js and reducer/index.js (Find Project_React Commit)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+// action/index.js EXAMPLE
+export const handleTextInput = (val) => {
+    return {
+        type: 'HANDLE_TEXT_INPUT',
+        input: val.target.value
+    }
+}
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+// reducer/index.js EXAMPLE
+const initState = {
+    handleTextInput: ''
+}
 
-### Code Splitting
+const Reducer = (state = initState, action) => {
+    switch (action.type) {
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+        case 'HANDLE_TEXT_INPUT':
+            return Object.assign({}, state, {
+                handleTextInput: action.input
+            })
 
-### Analyzing the Bundle Size
+        default:
+            return state
+    }
+}
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+export default Reducer
+```
 
-### Making a Progressive Web App
+3.Open App.js do something...
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+```
+//App.js EXAMPLE
+import React from 'react';
+import './App.css';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import Reducer from './components/redux/reducer/index'
+import TextInput from './components/input/textInput'
 
-### Advanced Configuration
+let store = createStore(Reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+function App() {
+  return (
+    <Provider store={store}>
+      <TextInput/>
+    </Provider>
+  );
+}
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+export default App;
 
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```
