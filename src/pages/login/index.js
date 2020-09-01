@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, Button, Grid, Header, Segment, Message, Icon } from 'semantic-ui-react';
 import { setLoginInfo } from '../../components/redux/action/auth';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { apiOpenApiLogin } from "../../core/api"; 
 import './index.css';
 
@@ -89,7 +90,7 @@ class LoginIndex extends Component {
                                 </Segment>
                             </Form>
                             <Message>
-                                New to us? <a href='#'>Sign Up</a>
+                                New to us?  Please click  <Link to="/register"> <b>here</b> </Link> to register.
                             </Message>
                         </Grid.Column>
                     </Grid.Row>
