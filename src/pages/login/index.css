@@ -1,0 +1,12 @@
+.Cus_fullScreen {
+    background: #DDD;
+    height: 100%;
+    width: 100%;
+    border: 'solid #DDD'
+}
+
+.Cus_errMsg {
+    color: red;
+    float: left;
+    padding-bottom: 10px;
+}
