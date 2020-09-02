@@ -9,6 +9,7 @@ import NotFoundPage from './pages/auth/notFound/index'
 import { Router, Switch, Route } from 'react-router-dom';
 import { history } from './core/history';
 
+import { SemanticToastContainer } from 'react-semantic-toasts';
 let store = createStore(Reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
                         <Route exact path="/register" component={RegisterPage} />
                         <Route component={NotFoundPage} />
                     </Switch>
+                    <SemanticToastContainer />
                 </div>
             </Router>
         </Provider>

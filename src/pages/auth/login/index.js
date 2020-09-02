@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { apiOpenApiLogin } from "../../../core/api";
 import './index.css';
 import { history } from '../../../core/history';
+import { toast } from 'react-semantic-toasts';
 
 class LoginPage extends Component {
 
@@ -40,11 +41,31 @@ class LoginPage extends Component {
                     console.log(res);
                     if (res.data.setStatusCode === 200) {
                         this.props.setLoginInfo(res);
-                        history.push('/');
+                        toast(
+                            {
+                                title: 'Login Success.',
+                                type: 'success',
+                                description: `Hello,  ${res.data.data.account} .`
+                            },
+                            () => console.log('toast closed'),
+                            () => console.log('toast clicked'),
+                            () => console.log('toast dismissed')
+                        );
+                        // history.push('/');
                     }
                 })
                 .catch(err => {
                     console.log(err);
+                    toast(
+                        {
+                            title: 'Registe Failed.',
+                            type: 'error',
+                            description: <p>Omg...This is error.</p>
+                        },
+                        () => console.log('toast closed'),
+                        () => console.log('toast clicked'),
+                        () => console.log('toast dismissed')
+                    );
                 });
         }
     }

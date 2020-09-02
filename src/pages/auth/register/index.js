@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Form, Button, Grid, Header, Segment, Message, Icon } from 'semantic-ui-react';
+import { Form, Button,  Grid, Header, Segment, Message, Icon } from 'semantic-ui-react';
 import { setLoginInfo } from '../../../components/redux/action/auth';
 import { connect } from 'react-redux';
 import { apiOpenApiSetAccount } from "../../../core/api";
 import { Link } from 'react-router-dom';
 import { history } from '../../../core/history';
 import './index.css';
-
+import { toast } from 'react-semantic-toasts';
 class RegisterPage extends Component {
 
     constructor(props) {
@@ -43,10 +43,30 @@ class RegisterPage extends Component {
                 .then(res => {
                     console.log(res);
                     if (res.data.setStatusCode === 200) {
+                        toast(
+                            {
+                                title: 'Registe Success.',
+                                type: 'success',
+                                description: <p>You can login your account now.</p>
+                            },
+                            () => console.log('toast closed'),
+                            () => console.log('toast clicked'),
+                            () => console.log('toast dismissed')
+                        );
                         history.push('/login');
                     }
                 })
                 .catch(err => {
+                    toast(
+                        {
+                            title: 'Registe Failed.',
+                            type: 'error',
+                            description: <p>Omg...This is error.</p>
+                        },
+                        () => console.log('toast closed'),
+                        () => console.log('toast clicked'),
+                        () => console.log('toast dismissed')
+                    );
                     console.log(err);
                 });
         }
