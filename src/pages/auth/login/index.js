@@ -3,17 +3,18 @@ import { Form, Button, Grid, Header, Segment, Message, Icon } from 'semantic-ui-
 import { setLoginInfo } from '../../../components/redux/action/auth';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { apiOpenApiLogin } from "../../../core/api"; 
+import { apiOpenApiLogin } from "../../../core/api";
 import './index.css';
+import { history } from '../../../core/history';
 
 class LoginPage extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            account : '',
-            password:'',
-            submitted:false
+            account: '',
+            password: '',
+            submitted: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,32 +24,33 @@ class LoginPage extends Component {
         const { name, value } = e.target;
         this.setState({ [name]: value });
     }
-    
+
     handleSubmit(e) {
         e.preventDefault();
         this.setState({ submitted: true });
         const { account, password } = this.state;
         if (account && password) {
-            const body={
-                "account":account,
-                "pwd":password
+            const body = {
+                "account": account,
+                "pwd": password
             };
-            
+
             apiOpenApiLogin(body)
-            .then(res=> {
-                console.log(res);        
-                if(res.data.setStatusCode === 200){
-                    this.props.setLoginInfo(res);
-                }
-            })
-            .catch(err=> {
-                console.log(err);
-            });
+                .then(res => {
+                    console.log(res);
+                    if (res.data.setStatusCode === 200) {
+                        this.props.setLoginInfo(res);
+                        history.push('/');
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         }
     }
 
     render() {
-        const { password ,  submitted,account }  = this.state;
+        const { password, submitted, account } = this.state;
 
         return (
             <div className="Cus_fullScreen">
@@ -70,7 +72,7 @@ class LoginPage extends Component {
                                         onChange={this.handleChange}
                                         error={submitted && !account}
                                     />
-                                    {submitted && !account && password && <div className="Cus_errMsg" >Account is required</div> }
+                                    {submitted && !account && password && <div className="Cus_errMsg" >Account is required</div>}
                                     <Form.Input
                                         fluid
                                         icon='lock'
@@ -82,8 +84,8 @@ class LoginPage extends Component {
                                         onChange={this.handleChange}
                                         error={submitted && !password}
                                     />
-                                    {submitted && !password && account && <div className="Cus_errMsg" >Password is required</div> }
-                                    {submitted && !password && !account && <div className="Cus_errMsg" > Account and password are required</div> }
+                                    {submitted && !password && account && <div className="Cus_errMsg" >Password is required</div>}
+                                    {submitted && !password && !account && <div className="Cus_errMsg" > Account and password are required</div>}
                                     <Button color='teal' fluid size='large' type="submit" >
                                         Login
                                 </Button>
@@ -102,15 +104,15 @@ class LoginPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        account:state.account,
-        userId:state.userId,
-        token:state.token
+        account: state.account,
+        userId: state.userId,
+        token: state.token
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setLoginInfo:((data)=>{
+        setLoginInfo: ((data) => {
             dispatch(setLoginInfo(data))
         })
     }

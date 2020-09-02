@@ -3,7 +3,7 @@ import { Button, Grid, Header, Segment, Icon } from 'semantic-ui-react';
 import { setLoginInfo } from '../../../components/redux/action/auth';
 import { connect } from 'react-redux';
 import './index.css';
-import { createBrowserHistory } from 'history'
+import { history } from '../../../core/history';
 
 class NotFoundPage extends Component {
 
@@ -17,9 +17,7 @@ class NotFoundPage extends Component {
     }
 
     goBack() {
-        const history = createBrowserHistory();
-
-        history.goBack();
+        history.push('/login');
     }
 
     render() {

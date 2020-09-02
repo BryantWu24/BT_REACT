@@ -3,7 +3,8 @@ import { Form, Button, Grid, Header, Segment, Message, Icon } from 'semantic-ui-
 import { setLoginInfo } from '../../../components/redux/action/auth';
 import { connect } from 'react-redux';
 import { apiOpenApiSetAccount } from "../../../core/api";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { history } from '../../../core/history';
 import './index.css';
 
 class RegisterPage extends Component {
@@ -42,6 +43,7 @@ class RegisterPage extends Component {
                 .then(res => {
                     console.log(res);
                     if (res.data.setStatusCode === 200) {
+                        history.push('/login');
                     }
                 })
                 .catch(err => {
