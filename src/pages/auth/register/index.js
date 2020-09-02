@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Form, Button, Grid, Header, Segment, Message, Icon } from 'semantic-ui-react';
-import { setLoginInfo } from '../../components/redux/action/auth';
+import { setLoginInfo } from '../../../components/redux/action/auth';
 import { connect } from 'react-redux';
-import { apiOpenApiSetAccount } from "../../core/api";
+import { apiOpenApiSetAccount } from "../../../core/api";
 import { Link } from 'react-router-dom'
 import './index.css';
 
-class RegisterIndex extends Component {
+class RegisterPage extends Component {
 
     constructor(props) {
         super(props);
@@ -145,4 +145,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterIndex) 
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage) 

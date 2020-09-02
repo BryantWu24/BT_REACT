@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Grid, Header, Segment, Icon } from 'semantic-ui-react';
-import { setLoginInfo } from '../../components/redux/action/auth';
+import { setLoginInfo } from '../../../components/redux/action/auth';
 import { connect } from 'react-redux';
 import './index.css';
 import { createBrowserHistory } from 'history'
